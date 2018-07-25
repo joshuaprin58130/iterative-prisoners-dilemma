@@ -6,63 +6,29 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+team_name = 'OJ' # Only 10 chars displayed.
+strategy_name = 'Collude, but retaliate, then let history decide'
+strategy_description = 'For the first 10 rounds, collude unless betrayed. After 10 rounds, betray if opponent betray rate is greater than 50%.'
     
 def move(my_history, their_history, my_score, their_score):
-    ''' Arguments accepted: my_history, their_history are strings.
-    my_score, their_score are ints.
+    '''The thought process behind this strategy is that collusion is the optimal strategy IF your opponent is willing to collude. The code here
+    is designed to be generous at the start, by colluding with no prior knowledge. For the rest of the first 10 turns, the algorithm will default to
+    colluding UNLESS betrayed in the previous round. After 10 rounds are complete, the algorithm examines the history of the opponent. The algorithm
+    will collude if the opponent has a history of colluding (50% or greater collusion rate), but will betray otherwise.'''
     
-    Make my move.
-    Returns 'c' or 'b'. 
-    '''
-
-    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
-    # their_history: a string of the same length as history, possibly empty. 
-    # The first round between these two players is my_history[0] and their_history[0].
-    # The most recent round is my_history[-1] and their_history[-1].
-    
-    # Analyze my_history and their_history and/or my_score and their_score.
-    # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
-
-    
-def test_move(my_history, their_history, my_score, their_score, result):
-    '''calls move(my_history, their_history, my_score, their_score)
-    from this module. Prints error if return value != result.
-    Returns True or False, dpending on whether result was as expected.
-    '''
-    real_result = move(my_history, their_history, my_score, their_score)
-    if real_result == result:
-        return True
+    if len(my_history) == 0:
+        choice = 'c'    
+    elif len(my_history)<=10:
+        if their_history[-1] == 'b':
+            choice = 'b'
+        else:
+            choice = 'c'
     else:
-        print("move(" +
-            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
-                       str(my_score), str(their_score)])+
-            ") returned " + "'" + real_result + "'" +
-            " and should have returned '" + result + "'")
-        return False
-
-if __name__ == '__main__':
-     
-    # Test 1: Betray on first move.
-    if test_move(my_history='',
-              their_history='', 
-              my_score=0,
-              their_score=0,
-              result='b'):
-         print 'Test passed'
-     # Test 2: Continue betraying if they collude despite being betrayed.
-    test_move(my_history='bbb',
-              their_history='ccc', 
-              # Note the scores are for testing move().
-              # The history and scores don't need to match unless
-              # that is relevant to the test of move(). Here,
-              # the simulation (if working correctly) would have awarded 
-              # 300 to me and -750 to them. This test will pass if and only if
-              # move('bbb', 'ccc', 0, 0) returns 'b'.
-              my_score=0, 
-              their_score=0,
-              result='b')             
+        betray_rate = their_history.count('b')/len(their_history)
+        if betray_rate >= 0.5:
+            choice = 'b'
+        else:
+            choice = 'c'
+            
+    return choice
+                       
