@@ -6,11 +6,14 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
-    
+team_name = 'BillShank' # Only 10 chars displayed.
+strategy_name = 'MAGA'
+strategy_description = 'Irrational Moves: If winning change.'
 def move(my_history, their_history, my_score, their_score):
+    if my_score > their_score:
+        return 'b'
+    else:
+        return 'c'
     ''' Arguments accepted: my_history, their_history are strings.
     my_score, their_score are ints.
     
@@ -26,13 +29,13 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
+    # return 'c'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
-    Returns True or False, dpending on whether result was as expected.
+    Returns True or False, depending on whether result was as expected.
     '''
     real_result = move(my_history, their_history, my_score, their_score)
     if real_result == result:
