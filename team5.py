@@ -17,18 +17,18 @@ def move(my_history, their_history, my_score, their_score):
     will collude if the opponent has a history of colluding (50% or greater collusion rate), but will betray otherwise.'''
     
     if len(my_history) == 0:
-        choice = 'c'    
+        selection = 'c'    
     elif len(my_history)<=10:
         if their_history[-1] == 'b':
-            choice = 'b'
+            selection = 'b'
         else:
-            choice = 'c'
+            selection = 'c'
     else:
         betray_rate = their_history.count('b')/len(their_history)
         if betray_rate >= 0.5:
-            choice = 'b'
+            selection = 'b'
         else:
-            choice = 'c'
+            selection = 'c'
             
-    return choice
+    return selection
                        
