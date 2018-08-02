@@ -8,7 +8,7 @@
 
 team_name = 'Team Zero' # Only 10 chars displayed.
 strategy_name = 'Collude but retaliate first 110, Betray last 110'
-strategy_description = 'How does this strategy decide?'
+strategy_description = 'collude but follow human nature'
     
 def move(my_history, their_history, my_score, their_score):
     
