@@ -5,11 +5,7 @@
 #     strategy_description: a string
 #     move: A function that returns 'c' or 'b'
 ####
-<<<<<<< 
 
-=======
-
->>>>>>>
 import random 
 team_name = 'Bring it on' # Only 10 chars displayed.
 strategy_name = 'Never forgive, never forget'
